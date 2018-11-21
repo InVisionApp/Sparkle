@@ -297,8 +297,11 @@
     [self.statusController setProgressValue:1.0]; // Fill the bar.
     [self.statusController setButtonEnabled:YES];
     [self.statusController setButtonTitle:SULocalizedString(@"Install and Relaunch", nil) target:self action:@selector(installAndRestart:) isDefault:YES];
-    [[self.statusController window] makeKeyAndOrderFront:self];
-    [NSApp requestUserAttention:NSInformationalRequest];
+    
+    if ([self shouldShowDownloadProgress]) {
+        [[self.statusController window] makeKeyAndOrderFront:self];
+        [NSApp requestUserAttention:NSInformationalRequest];
+    }
 }
 
 - (void)installAndRestart:(id)__unused sender
