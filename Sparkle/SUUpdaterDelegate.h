@@ -27,6 +27,7 @@ SU_EXPORT extern NSString *const SUUpdaterDidFinishLoadingAppCastNotification;
 SU_EXPORT extern NSString *const SUUpdaterDidFindValidUpdateNotification;
 SU_EXPORT extern NSString *const SUUpdaterDidNotFindUpdateNotification;
 SU_EXPORT extern NSString *const SUUpdaterWillRestartNotification;
+SU_EXPORT extern NSString *const SUUpdaterDownloadProgressNotification;
 #define SUUpdaterWillRelaunchApplicationNotification SUUpdaterWillRestartNotification;
 #define SUUpdaterWillInstallUpdateNotification SUUpdaterWillRestartNotification;
 
@@ -34,6 +35,11 @@ SU_EXPORT extern NSString *const SUUpdaterWillRestartNotification;
 SU_EXPORT extern NSString *const SUUpdaterAppcastItemNotificationKey;
 // Key for the SUAppcast object in the SUUpdaterDidFinishLoadingAppCastNotification userInfo
 SU_EXPORT extern NSString *const SUUpdaterAppcastNotificationKey;
+
+// Key for the value object in the SUUpdaterDownloadProgressNotification userInfo
+SU_EXPORT extern NSString *const SUUpdaterDownloadProgressValueKey;
+// Key for the total object in the SUUpdaterDownloadProgressNotification userInfo
+SU_EXPORT extern NSString *const SUUpdaterDownloadProgressTotalKey;
 
 // -----------------------------------------------------------------------------
 //	SUUpdater Delegate:
@@ -296,6 +302,8 @@ SU_EXPORT extern NSString *const SUUpdaterAppcastNotificationKey;
  */
 - (void)updater:(SUUpdater *)updater didAbortWithError:(NSError *)error;
 
+- (BOOL) updaterShouldShowDownloadProgress:(SUUpdater *)updater;
+- (void)updater:(SUUpdater *)updater downloadProgress:(double)value total:(double) total;
 @end
 
 NS_ASSUME_NONNULL_END

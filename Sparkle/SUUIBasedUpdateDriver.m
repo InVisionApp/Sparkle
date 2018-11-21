@@ -150,6 +150,14 @@
     }
 }
 
+- (BOOL) shouldShowDownloadProgress {
+    id<SUUpdaterPrivate> updater = self.updater;
+    if ([[updater delegate] respondsToSelector:@selector(updaterShouldShowDownloadProgress:)]) {
+        return [[updater delegate] updaterShouldShowDownloadProgress:self.updater];
+    }
+    return YES;
+}
+
 - (void)downloadUpdate
 {
     BOOL createdStatusController = NO;
@@ -162,7 +170,7 @@
     [self.statusController setButtonTitle:SULocalizedString(@"Cancel", nil) target:self action:@selector(cancelDownload:) isDefault:NO];
     [self.statusController setButtonEnabled:YES];
     
-    if (createdStatusController) {
+    if (createdStatusController && [self shouldShowDownloadProgress]) {
         [self.statusController showWindow:self];
     }
     
@@ -223,6 +231,18 @@
         } else {
             [self.statusController setStatusText:[NSString stringWithFormat:SULocalizedString(@"%@ downloaded", nil), [self localizedStringFromByteCount:(long long)self.statusController.progressValue]]];
         }
+        
+        id<SUUpdaterPrivate> updater = self.updater;
+        if ([[updater delegate] respondsToSelector:@selector(updater:downloadProgress:total:)]) {
+            [[updater delegate] updater:self.updater
+                       downloadProgress:self.statusController.progressValue
+                                  total:self.statusController.maxProgressValue];
+        }
+        
+        NSDictionary* userInfo = @{SUUpdaterDownloadProgressTotalKey: @(self.statusController.maxProgressValue),
+                                   SUUpdaterDownloadProgressValueKey: @(self.statusController.progressValue)};
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:SUUpdaterDownloadProgressNotification object:self.updater userInfo:userInfo];
     });
 }
 
