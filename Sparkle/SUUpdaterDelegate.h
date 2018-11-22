@@ -317,6 +317,9 @@ SU_EXPORT extern NSString *const SUUpdaterDownloadProgressTotalKey;
  \param total the total amount to be downloaded
  */
 - (void)updater:(SUUpdater *)updater downloaded:(double)value total:(double) total;
+
+- (void)updater:(SUUpdater *)updater presentUpdateChoicesWithCompletionBlock:(void (^)(BOOL update))block;
+
 @end
 
 NS_ASSUME_NONNULL_END

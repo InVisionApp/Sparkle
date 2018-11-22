@@ -68,6 +68,15 @@
         return;
     }
 
+    if ([[updater delegate] respondsToSelector:@selector(updater:presentUpdateChoicesWithCompletionBlock:)]) {
+        __weak SUUIBasedUpdateDriver *this = self;
+        [[updater delegate] updater:self.updater presentUpdateChoicesWithCompletionBlock:^(BOOL update) {
+            SUUpdateAlertChoice choice = update ? SUInstallUpdateChoice : SURemindMeLaterChoice;
+            [this updateAlertFinishedWithChoice:choice];
+        }];
+        return;
+    }
+    
     self.updateAlert = [[SUUpdateAlert alloc] initWithAppcastItem:self.updateItem host:self.host completionBlock:^(SUUpdateAlertChoice choice) {
         [self updateAlertFinishedWithChoice:choice];
     }];
