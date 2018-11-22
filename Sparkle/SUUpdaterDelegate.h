@@ -302,8 +302,21 @@ SU_EXPORT extern NSString *const SUUpdaterDownloadProgressTotalKey;
  */
 - (void)updater:(SUUpdater *)updater didAbortWithError:(NSError *)error;
 
-- (BOOL) updaterShouldShowDownloadProgress:(SUUpdater *)updater;
-- (void)updater:(SUUpdater *)updater downloadProgress:(double)value total:(double) total;
+/*!
+ Called before showing progress UI. Return NO to suppress progress UI.
+ 
+ \param updater The SUUpdater instance.
+ */
+- (BOOL) updaterShowProgressUI:(SUUpdater *)updater;
+    
+/*!
+ Called after received downloaded data
+ 
+ \param updater The SUUpdater instance.
+ \param value the currnet amount downloaded
+ \param total the total amount to be downloaded
+ */
+- (void)updater:(SUUpdater *)updater downloaded:(double)value total:(double) total;
 @end
 
 NS_ASSUME_NONNULL_END

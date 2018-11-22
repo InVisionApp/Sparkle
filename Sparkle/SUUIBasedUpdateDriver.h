@@ -20,7 +20,7 @@
 - (void)showAlert:(NSAlert *)alert;
 - (IBAction)cancelDownload:(id)sender;
 - (void)installAndRestart:(id)sender;
-- (BOOL) shouldShowDownloadProgress;
+- (BOOL) shouldShowProgressUI;
 
 @end
 

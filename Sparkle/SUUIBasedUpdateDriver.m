@@ -150,10 +150,14 @@
     }
 }
 
-- (BOOL) shouldShowDownloadProgress {
+- (BOOL) shouldShowProgressUI {
+    if (self.automaticallyInstallUpdates == NO) {
+        return NO;
+    }
+    
     id<SUUpdaterPrivate> updater = self.updater;
-    if ([[updater delegate] respondsToSelector:@selector(updaterShouldShowDownloadProgress:)]) {
-        return [[updater delegate] updaterShouldShowDownloadProgress:self.updater];
+    if ([[updater delegate] respondsToSelector:@selector(updaterShowProgressUI:)]) {
+        return [[updater delegate] updaterShowProgressUI:self.updater];
     }
     return YES;
 }
@@ -170,8 +174,12 @@
     [self.statusController setButtonTitle:SULocalizedString(@"Cancel", nil) target:self action:@selector(cancelDownload:) isDefault:NO];
     [self.statusController setButtonEnabled:YES];
     
-    if (createdStatusController && [self shouldShowDownloadProgress]) {
-        [self.statusController showWindow:self];
+    if ([self shouldShowProgressUI]) {
+        if (createdStatusController) {
+            [self.statusController showWindow:self];
+        }
+    } else if (self.statusController.window.isVisible) {
+        [[self.statusController window] close];
     }
     
     [super downloadUpdate];
@@ -233,9 +241,9 @@
         }
         
         id<SUUpdaterPrivate> updater = self.updater;
-        if ([[updater delegate] respondsToSelector:@selector(updater:downloadProgress:total:)]) {
+        if ([[updater delegate] respondsToSelector:@selector(updater:downloaded:total:)]) {
             [[updater delegate] updater:self.updater
-                       downloadProgress:self.statusController.progressValue
+                             downloaded:self.statusController.progressValue
                                   total:self.statusController.maxProgressValue];
         }
         
@@ -298,10 +306,8 @@
     [self.statusController setButtonEnabled:YES];
     [self.statusController setButtonTitle:SULocalizedString(@"Install and Relaunch", nil) target:self action:@selector(installAndRestart:) isDefault:YES];
     
-    if ([self shouldShowDownloadProgress]) {
-        [[self.statusController window] makeKeyAndOrderFront:self];
-        [NSApp requestUserAttention:NSInformationalRequest];
-    }
+    [[self.statusController window] makeKeyAndOrderFront:self];
+    [NSApp requestUserAttention:NSInformationalRequest];
 }
 
 - (void)installAndRestart:(id)__unused sender

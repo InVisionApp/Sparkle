@@ -48,7 +48,7 @@
 
 - (void)checkForUpdatesAtURL:(NSURL *)URL host:(SUHost *)aHost
 {
-    if ([self shouldShowDownloadProgress]) {
+    if ([self shouldShowProgressUI]) {
         self.checkingController = [[SUStatusController alloc] initWithHost:aHost];
         [[self.checkingController window] center]; // Force the checking controller to load its window.
         [self.checkingController beginActionWithTitle:SULocalizedString(@"Checking for updates...", nil) maxProgressValue:0.0 statusText:nil];
