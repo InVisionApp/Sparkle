@@ -319,6 +319,7 @@ SU_EXPORT extern NSString *const SUUpdaterDownloadProgressTotalKey;
 - (void)updater:(SUUpdater *)updater downloaded:(double)value total:(double) total;
 
 - (void)updater:(SUUpdater *)updater presentUpdateChoicesWithCompletionBlock:(void (^)(BOOL update))block;
+- (BOOL)updaterShouldAutoupdate:(SUUpdater *)updater;
 
 @end
 

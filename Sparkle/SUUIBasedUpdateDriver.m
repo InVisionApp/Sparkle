@@ -50,7 +50,12 @@
 - (instancetype)initWithUpdater:(id<SUUpdaterPrivate>)anUpdater
 {
     if ((self = [super initWithUpdater:anUpdater])) {
-        self.automaticallyInstallUpdates = NO;
+        
+        if ([[anUpdater delegate] respondsToSelector:@selector(updaterShouldAutoupdate:)]) {
+            self.automaticallyInstallUpdates = [[anUpdater delegate] updaterShouldAutoupdate:self.updater];
+        } else {
+            self.automaticallyInstallUpdates = NO;
+        }
         self.showErrors = YES;
     }
     return self;
