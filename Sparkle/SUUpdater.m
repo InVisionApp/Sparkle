@@ -36,6 +36,12 @@ NSString *const SUUpdaterAppcastNotificationKey = @"SUUpdaterAppCastNotification
 NSString *const SUUpdaterDownloadProgressNotification = @"SUUpdaterDownloadProgressNotification";
 NSString *const SUUpdaterDownloadProgressValueKey = @"SUUpdaterDownloadProgressValueKey";
 NSString *const SUUpdaterDownloadProgressTotalKey = @"SUUpdaterDownloadProgressTotalKey";
+NSString *const SUUpdaterFailedToDownloadUpdateNotification = @"SUUpdaterFailedToDownloadUpdateNotification";
+NSString *const SUUpdaterDidAbortWithErrorNotification = @"SUUpdaterDidAbortWithErrorNotification";
+NSString *const SUUpdaterDidAbortNotification = @"SUUpdaterDidAbortNotification";
+
+NSString *const SUUpdaterErrorKey = @"SUUpdaterErrorKey";
+NSString *const SUUpdaterItemKey = @"SUUpdaterItemKey";
 
 @interface SUUpdater () <SUUpdaterPrivate>
 @property (strong) NSTimer *checkTimer;

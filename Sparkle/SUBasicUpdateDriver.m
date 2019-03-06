@@ -340,6 +340,8 @@
              failedToDownloadUpdate:self.updateItem
                               error:error];
     }
+    NSDictionary* notificationInfo = @{ SUUpdaterErrorKey: error, SUUpdaterItemKey: self.updateItem };
+    [[NSNotificationCenter defaultCenter] postNotificationName:SUUpdaterFailedToDownloadUpdateNotification object:self.updater userInfo:notificationInfo];
     
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithDictionary:@{
                                                                                     NSLocalizedDescriptionKey: SULocalizedString(@"An error occurred while downloading the update. Please try again later.", nil),
@@ -643,6 +645,7 @@
     [self cleanUpDownload];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     self.updateItem = nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:SUUpdaterDidAbortNotification object:self.updater userInfo:nil];
     [super abortUpdate];
 }
 
@@ -666,7 +669,9 @@
     if ([updaterDelegate respondsToSelector:@selector(updater:didAbortWithError:)]) {
         [updaterDelegate updater:self.updater didAbortWithError:error];
     }
-
+    NSDictionary *userInfo = @{ SUUpdaterErrorKey: error };
+    [[NSNotificationCenter defaultCenter] postNotificationName:SUUpdaterDidAbortWithErrorNotification object:self.updater userInfo:userInfo];
+    
     [self abortUpdate];
 }
 

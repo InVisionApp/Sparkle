@@ -41,6 +41,12 @@ SU_EXPORT extern NSString *const SUUpdaterDownloadProgressValueKey;
 // Key for the total object in the SUUpdaterDownloadProgressNotification userInfo
 SU_EXPORT extern NSString *const SUUpdaterDownloadProgressTotalKey;
 
+SU_EXPORT extern NSString *const SUUpdaterFailedToDownloadUpdateNotification;
+SU_EXPORT extern NSString *const SUUpdaterDidAbortNotification;
+SU_EXPORT extern NSString *const SUUpdaterDidAbortWithErrorNotification;
+SU_EXPORT extern NSString *const SUUpdaterErrorKey;
+SU_EXPORT extern NSString *const SUUpdaterItemKey;
+
 // -----------------------------------------------------------------------------
 //	SUUpdater Delegate:
 // -----------------------------------------------------------------------------
