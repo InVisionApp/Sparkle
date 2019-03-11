@@ -15,7 +15,7 @@
 @class SUStatusController;
 
 @interface SUUIBasedUpdateDriver : SUBasicUpdateDriver
-@property (assign) BOOL showErrors;
+@property (nonatomic, assign) BOOL showErrors;
 
 - (void)showAlert:(NSAlert *)alert;
 - (IBAction)cancelDownload:(id)sender;

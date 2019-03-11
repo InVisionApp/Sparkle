@@ -327,6 +327,8 @@ SU_EXPORT extern NSString *const SUUpdaterItemKey;
 - (void)updater:(SUUpdater *)updater presentUpdateChoicesWithCompletionBlock:(void (^)(BOOL update))block;
 - (BOOL)updaterShouldAutoupdate:(SUUpdater *)updater;
 
+- (BOOL)updaterShouldShowErrors:(SUUpdater *)updater;
+
 @end
 
 NS_ASSUME_NONNULL_END

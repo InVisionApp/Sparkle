@@ -45,7 +45,6 @@
 
 @synthesize statusController;
 @synthesize updateAlert;
-@synthesize showErrors;
 
 - (instancetype)initWithUpdater:(id<SUUpdaterPrivate>)anUpdater
 {
@@ -396,6 +395,15 @@
 
     if ([[updater delegate] respondsToSelector:@selector(updaterDidShowModalAlert:)])
         [[updater delegate] updaterDidShowModalAlert:self.updater];
+}
+
+- (BOOL) showErrors {
+    id<SUUpdaterPrivate> updater = self.updater;
+    if ([[updater delegate] respondsToSelector:@selector(updaterShouldShowErrors:)]) {
+        return [[updater delegate] updaterShouldShowErrors:self.updater];
+    }
+    
+    return _showErrors;
 }
 
 @end
