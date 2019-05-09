@@ -316,9 +316,20 @@ static NSString *const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefaults
             }
         }
     }
-
+    Class cls = nil;
+    
+    if (automatic) {
+        if ([self.delegate useUserInitiatedUpdateDriverForAutomaticUpdates:self]) {
+            cls = [SUUserInitiatedUpdateDriver class];
+        } else {
+            cls = [SUAutomaticUpdateDriver class];
+        }
+    } else {
+        cls = [SUScheduledUpdateDriver class];
+    }
+    
     // Do not use reachability for a preflight check. This can be deceptive and a bad idea. Apple does not recommend doing it.
-    SUUpdateDriver *theUpdateDriver = [(SUBasicUpdateDriver *)[(automatic ? [SUAutomaticUpdateDriver class] : [SUScheduledUpdateDriver class])alloc] initWithUpdater:self];
+    SUUpdateDriver *theUpdateDriver = [(SUBasicUpdateDriver *)[cls alloc] initWithUpdater:self];
     
     [self checkForUpdatesWithDriver:theUpdateDriver];
 }

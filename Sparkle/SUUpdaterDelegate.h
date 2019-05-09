@@ -328,7 +328,7 @@ SU_EXPORT extern NSString *const SUUpdaterItemKey;
 - (BOOL)updaterShouldAutoupdate:(SUUpdater *)updater;
 
 - (BOOL)updaterShouldShowErrors:(SUUpdater *)updater;
-
+- (BOOL) useUserInitiatedUpdateDriverForAutomaticUpdates:(SUUpdater *)updater;
 @end
 
 NS_ASSUME_NONNULL_END
