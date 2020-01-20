@@ -948,6 +948,8 @@
 		A5BF4F1B1BC7668B007A052A /* SUTestWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUTestWebServer.h; sourceTree = "<group>"; };
 		A5BF4F1C1BC7668B007A052A /* SUTestWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUTestWebServer.m; sourceTree = "<group>"; };
 		C23E88591BE7AF890050BB73 /* SparkleTestCodeSignApp.enc.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = SparkleTestCodeSignApp.enc.dmg; sourceTree = "<group>"; };
+		D1E6198923D66B0900E9E3FD /* Autoupdate.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Autoupdate.entitlements; sourceTree = "<group>"; };
+		D1E6198A23D66B1200E9E3FD /* fileop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = fileop.entitlements; path = fileop/fileop.entitlements; sourceTree = "<group>"; };
 		E1545EC31E1D7E0200FAECE8 /* SUTouchBarButtonGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUTouchBarButtonGroup.h; sourceTree = "<group>"; };
 		E1545EC41E1D7E0200FAECE8 /* SUTouchBarButtonGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUTouchBarButtonGroup.m; sourceTree = "<group>"; };
 		E19CA4901E2E7E4D009D4D18 /* SUTouchBarForwardDeclarations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUTouchBarForwardDeclarations.h; sourceTree = "<group>"; };
@@ -1098,6 +1100,8 @@
 		0867D691FE84028FC02AAC07 /* Sparkle */ = {
 			isa = PBXGroup;
 			children = (
+				D1E6198A23D66B1200E9E3FD /* fileop.entitlements */,
+				D1E6198923D66B0900E9E3FD /* Autoupdate.entitlements */,
 				5AA96C561E0AE0DB00CA4346 /* generate_appcast */,
 				1495006D195FBBBD00BC5B5B /* Sparkle */,
 				14732BB81960EEB600593899 /* Resources */,
@@ -2801,6 +2805,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D30D94A70100DD942E /* ConfigRelaunchDebug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Autoupdate.entitlements;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 			};
 			name = Coverage;
 		};
@@ -2864,6 +2871,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D30D94A70100DD942E /* ConfigRelaunchDebug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Autoupdate.entitlements;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 			};
 			name = Debug;
 		};
@@ -2871,6 +2881,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA1941D40D94A70100DD942E /* ConfigRelaunchRelease.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Autoupdate.entitlements;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 			};
 			name = Release;
 		};
@@ -2999,6 +3012,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 722954C81D04E89500ECF9CA /* ConfigFileop.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = fileop/fileop.entitlements;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3008,6 +3024,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 722954C81D04E89500ECF9CA /* ConfigFileop.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = fileop/fileop.entitlements;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -3017,6 +3036,9 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 722954C81D04E89500ECF9CA /* ConfigFileop.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = fileop/fileop.entitlements;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
